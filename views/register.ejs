@@ -1,0 +1,114 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+  <head>
+    <title>Pizza - Free Bootstrap 4 Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+		<% include partialtemplate/csslinks.ejs %>
+		
+		
+  </head>
+  <body>
+		<% include partialtemplate/navlinks.ejs %>
+        
+        <section class="home-slider owl-carousel img" style="background-image: url(staticfiles/images/bg_1.jpg);">
+
+            <div class="slider-item" style="background-image: url(staticfiles/images/bg_3.jpg);">
+                <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+    
+                <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                    <h1 class="mb-3 mt-5 bread">Register</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="/login">Home</a></span> <span>Register</span></p>
+                </div>
+    
+                </div>
+            </div>
+            </div>
+        </section>
+
+
+
+        <section class="container">
+            <div class="row" >
+                <div class="col-sm-8 m-auto d-block bg-bark">
+                    <p class="h2 text-light text-center my-5" style="border-bottom:1px white solid;font-family:Algerian">Register With US</p>
+                    <div class="invisible" id="regErr"> </div>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input id="country" type="text" placeholder="**Select a country" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input id="firstName" type="text" placeholder="**enter your first name" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input id="lastName" type="text" placeholder="**enter your last name" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                                <label for="companyName">Company Name</label>
+                                <input id="companyName" type="text" placeholder="**enter company name" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                                <label for="address">Address</label>
+                                <input id="address" type="text" placeholder="**enter your address" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                                <label for="apartment"></label>
+                                <input id="apartment" type="text" placeholder="**apartment, suite, unit etc. (optional)" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                                <label for="state">State</label>
+                                <input id="state" type="text" placeholder="**select state" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="postaZip">Posta / Zip</label>
+                            <input id="postaZip" type="text" placeholder="**enter zip code" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="emailName">Email Address</label>
+                            <input id="emailName" type="text" placeholder="**enter your email" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input id="phone" type="text" placeholder="**enter phone number" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="accountPassword">Account Password</label>
+                            <input id="accountPassword" type="text" placeholder="**enter password" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="verifyPassword">Verify Password</label>
+                            <input id="verifyPassword" type="text" placeholder="**verify password" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <input id="regBtn" type="button" value="Submit" class="btn btn-success btn-block my-4" style="border-radius:5px"/>
+                        </div>
+
+                    </form>
+                        <div class="form-group">
+                            <input id="regBtnFacebook" type="button" value="Register with facbook" class="btn btn-block my-4 text-light" style="background-color:darkblue; border-radius:5px" />
+                        </div>
+                        <div class="form-group">
+                            <input id="regBtnGmail" type="button" value="Register with Gmail" class="btn btn-block my-4  text-light" style="background-color:red; border-radius:5px"/>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+
+        
+		<% include partialtemplate/footer.ejs %>
+  
+
+        <!-- loader -->
+        <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+      
+        <% include partialtemplate/jslinks.ejs %>
+          
+    </body>
+</html>

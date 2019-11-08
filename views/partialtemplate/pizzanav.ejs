@@ -1,0 +1,134 @@
+<section class="ftco-menu">
+    <div class="container-fluid">
+        <div class="row d-md-flex">
+            <div class="col-lg-4 ftco-animate img f-menu-img mb-5 mb-md-0" style="background-image: url(staticfiles/images/about.jpg);">
+            </div>
+            <div class="col-lg-8 ftco-animate p-md-5">
+                <div class="row">
+              <div class="col-md-12 nav-link-wrap mb-5">
+                <div class="nav ftco-animate nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                  <a class="nav-link active" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Pizza</a>
+
+                  <a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Drinks</a>
+
+                  <a class="nav-link" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Burgers</a>
+
+                  <a class="nav-link" id="v-pills-4-tab" data-toggle="pill" href="#v-pills-4" role="tab" aria-controls="v-pills-4" aria-selected="false">Pasta</a>
+                </div>
+              </div>
+              <div class="col-md-12 d-flex align-items-center">
+                
+                <div class="tab-content ftco-animate" id="v-pills-tabContent">
+
+                  <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-1-tab">
+                      <div class="row">
+
+
+
+                        <% for(a=0; a < pizza.length ; a++){ %>
+                          <div class="col-md-4 text-center">
+                              <div class="menu-wrap">
+                                    <img class="menu-img img mb-4" src= <%= pizza[a].image %> />
+                                    <div class="text">
+                                        <h3>
+                                          <p><%= pizza[a].name %></p>
+                                        </h3>
+                                        <p><%= pizza[a].description %></p>
+                                        <p class="price"><span>$</span><span><%= pizza[a].price %></span></p>
+                                        <p><a href="cart/<%= pizza[a].name %>/<%= pizza[a].name %>" class="btn btn-white btn-outline-white">Add to cart</a></p>
+                                    </div>
+                              </div>
+                          </div>
+                        <% }; %>
+                        
+
+                          
+                      </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-2-tab">
+                    <div class="row">
+                          
+                                        
+                             
+                      <% for(a=0; a < drink.length ; a++){ %>
+                        <div class="col-md-4 text-center">
+                            <div class="menu-wrap">
+                                  <img class="menu-img img mb-4" src= <%= drink[a].image %> />
+                                  <div class="text">
+                                      <h3>
+                                        <p><%= drink[a].name %></p>
+                                      </h3>
+                                      <p><%= drink[a].description %></p>
+                                      <p class="price"><span>$</span><span id="orderPrice"><%= drink[a].price %></span></p>
+                                      <p><a href="cart/<%= drink[a].name %>/<%= drink[a].name %>" class="btn btn-white btn-outline-white">Add to cart</a></p>
+                                  </div>
+                            </div>
+                        </div>
+                      <% }; %>
+
+
+                          
+                      </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-3-tab">
+                    <div class="row">
+                          
+                          
+                    
+                      <% for(a=0; a < burger.length ; a++){ %>
+                        <div class="col-md-4 text-center">
+                            <div class="menu-wrap">
+                                  <img class="menu-img img mb-4" src= <%= burger[a].image %> />
+                                  <div class="text">
+                                      <h3>
+                                        <p><%= burger[a].name %></p>
+                                      </h3>
+                                      <p><%= burger[a].description %></p>
+                                      <p class="price"><span>$</span><span id="orderPrice"><%= burger[a].price %></span></p>
+                                      <p><a href="cart/<%= burger[a].name %>/<%= burger[a].name %>" class="btn btn-white btn-outline-white">Add to cart</a></p>
+                                  </div>
+                            </div>
+                        </div>
+                      <% }; %>
+
+
+
+                      </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="v-pills-4" role="tabpanel" aria-labelledby="v-pills-4-tab">
+                    <div class="row">
+                          
+                          
+                                        
+
+                      <% for(a=0; a < pasta.length ; a++){ %>
+                        <div class="col-md-4 text-center">
+                            <div class="menu-wrap">
+                                  <img class="menu-img img mb-4" src= <%= pasta[a].image %> />
+                                  <div class="text">
+                                      <h3>
+                                        <p><%= pasta[a].name %></p>
+                                      </h3>
+                                      <p><%= pasta[a].description %></p>
+                                      <p class="price"><span>$</span><span id="orderPrice"><%= pasta[a].price %></span></p>
+                                      <p><a href="cart/<%= pasta[a].name %>/<%= pasta[a].name %>" class="btn btn-white btn-outline-white">Add to cart</a></p>
+                                  </div>
+                            </div>
+                        </div>
+                      <% }; %>
+                                           
+
+
+
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</section>
