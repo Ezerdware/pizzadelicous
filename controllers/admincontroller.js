@@ -1,4 +1,4 @@
-function admincontroller(app, db, urlencodeparser){
+function admincontroller(app, db){
     app.get('/admin', (req,res)=>{
         res.render('admin/dashboard')
     })
@@ -7,15 +7,15 @@ function admincontroller(app, db, urlencodeparser){
         res.render('admin/product')
     })
 
-    app.post('/productupload', urlencodeparser, (req,res)=>{
+    app.post('/productupload', (req,res)=>{
         console.log(req.body);
     })
 
-    app.post('/productdelete', urlencodeparser, (req,res)=>{
+    app.post('/productdelete', (req,res)=>{
         console.log(req.body);
     })
 
-    app.post('/productupdate', urlencodeparser, (req,res)=>{
+    app.post('/productupdate', (req,res)=>{
         console.log(req.body);
     })
 // END
@@ -27,19 +27,19 @@ function admincontroller(app, db, urlencodeparser){
         res.render('admin/blogadmin')
     })
 
-    app.post('/blogpostcontent', urlencodeparser, (req,res)=>{
+    app.post('/blogpostcontent', (req,res)=>{
         console.log(req.body);
     })
 
-    app.post('/blogdeletepost', urlencodeparser, (req,res)=>{
+    app.post('/blogdeletepost', (req,res)=>{
         console.log(req.body);
     })
 
-    app.post('/blogcategoryadd', urlencodeparser, (req,res)=>{
+    app.post('/blogcategoryadd', (req,res)=>{
         console.log(req.body);
     })
 
-    app.post('/blogtagadd', urlencodeparser, (req,res)=>{
+    app.post('/blogtagadd', (req,res)=>{
         console.log(req.body);
     })
     
@@ -59,11 +59,11 @@ function admincontroller(app, db, urlencodeparser){
         res.render('admin/orders')
     })
 
-    app.post('/ordersearch', urlencodeparser, (req,res)=>{
+    app.post('/ordersearch', (req,res)=>{
         console.log(req.body)
     })
 
-    app.post('/orderdeleteorderid', urlencodeparser, (req,res)=>{
+    app.post('/orderdeleteorderid', (req,res)=>{
         console.log(req.body)
     })
     
@@ -73,7 +73,7 @@ function admincontroller(app, db, urlencodeparser){
         res.render('admin/members')
     })
 
-    app.post('/memberdeletemember', urlencodeparser, (req, res)=>{
+    app.post('/memberdeletemember', (req, res)=>{
         console.log(req.body)
     })
 // END
@@ -82,11 +82,11 @@ function admincontroller(app, db, urlencodeparser){
         res.render('admin/messages')
     })
 
-    app.post('/messagesendmail', urlencodeparser, (req, res)=>{
+    app.post('/messagesendmail', (req, res)=>{
         console.log(req.body)
     })
 
-    app.post('/messagedeletemessage', urlencodeparser, (req, res)=>{
+    app.post('/messagedeletemessage', (req, res)=>{
         console.log(req.body)
     })
 // END
@@ -95,7 +95,7 @@ function admincontroller(app, db, urlencodeparser){
         res.render('admin/coupon')
     })
 
-    app.post('/couponsavecouponcode', urlencodeparser, (req, res)=>{
+    app.post('/couponsavecouponcode', (req, res)=>{
         console.log(req.body)
     })
 
@@ -119,7 +119,7 @@ function admincontroller(app, db, urlencodeparser){
         res.json(codegetter)
     })
 
-    app.post('/coupondeletecouponcode', urlencodeparser, (req, res)=>{
+    app.post('/coupondeletecouponcode', (req, res)=>{
         console.log(req.body)
     })
 

@@ -1,12 +1,12 @@
 const loginModel=require('../models/loginModel')
 
-module.exports = async function (app, db, urlencodedParser) {
+module.exports = async function (app, db) {
     
     app.get('/login', async (req, res) => {
         res.render('login');
     });
 
-    app.post('/login', urlencodedParser, async (req, res) => {
+    app.post('/login', async (req, res) => {
         loginModel(db, req.body, res);
         // save user detail to the a global session variable
     });

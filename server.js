@@ -1,14 +1,11 @@
+require('dotenv').config()
 const express = require('express');
-const bodyParser = require('body-parser');
-const cookieParser= require('cookie-parser');
 const session= require('express-session');
-const KnexSessionStore = require('connect-session-knex')(session);
-const multer = require('multer');
-const nodemailer=require('nodemailer');
+let memorystore = require('memorystore')(session)
+let nanoid = require('nanoid')
+const sqlite3 = require('sqlite3')
 
-// database initialization
-var sqlite3 = require('sqlite3')
-
+// db setup
 var db = new sqlite3.Database('./databases/pizzaDB.db', (err) => {
     if (!err) {
         console.log('connected to pizzaDB');
@@ -21,38 +18,75 @@ var db = new sqlite3.Database('./databases/pizzaDB.db', (err) => {
 
 
 const app = express();
-var jsonParser = bodyParser.json();
-app.use(express.json())
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs')
+app.use(express.urlencoded({ extended: true }))
 app.use('/staticfiles', express.static('staticfiles'));
 
 
-var urlencodedParser = bodyParser.urlencoded({
-    extended: false
-})
-//express session helper for production
-const store = new KnexSessionStore({
-    clearInterval:1000 * 60 * 60 * 4
-  }); // defaults to a sqlite3 database
-  
+async function sessionSettings(app){
 
-//setting up express session
-app.set('trust proxy', 1)
-app.use(session({
-    store: store,
-    secret:"ezerd",
-    resave:true,
-    saveUninitialized:true,
-    cookie:{maxAge:1000 * 60 * 60 * 4, secure:true}
-}));
+    if (app.get('env') === 'production') {
+        app.use(session({
+    
+            genid: (req) => { return nanoid.nanoid(100) },
+            name: 'Pizzadelicious Frontend Production',
+            store: new memorystore({
+                checkPeriod: 1000 * 60 * 60
+            }),
+            secret: `${process.env.SESSION_KEY}`,
+            resave: true,
+            saveUninitialized: true,
+            cookie: { path: '/', httpOnly: false, secure: false, maxAge: 1000 * 60 * 60}
+        }))
+    }
+    
+    if (app.get('env') === 'development') {
+        app.use(session({
+    
+            genid: (req) => { return nanoid.nanoid(100) },
+            name: 'Pizzadelicious Frontend Development',
+            store: new memorystore({
+                checkPeriod: 1000 * 60 * 60
+            }),
+            secret: `${process.env.SESSION_KEY}`,
+            resave: true,
+            saveUninitialized: true,
+            cookie: { path: '/', httpOnly: false, secure: false, maxAge: 1000 * 60 * 60}
+        }))
+    }
+    
+    if (app.get('env') === 'staging') {
+        app.use(session({
+    
+            genid: (req) => { return nanoid.nanoid(100) },
+            name: 'Pizzadelicious Frontend Staging',
+            store: new memorystore({
+                checkPeriod: 1000 * 60 * 60
+            }),
+            secret: `${process.env.SESSION_KEY}`,
+            resave: true,
+            saveUninitialized: true,
+            cookie: { path: '/', httpOnly: false, secure: false, maxAge: 1000 * 60 * 60}
+        }))
+    }
+    
+    app.use((req, res, next) => {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')
+        next();
+    })
+    
+    
+    app.use((req, res, next) => {    
+        res.locals.session = req.session;
+        next();
+    })
+    
 
-app.use(cookieParser());
+}
 
-// declaration of global vars
-app.use(function(req, res, next){
-    res.locals.session=req.session;
-    next();
-})
+sessionSettings(app)
 
 const logincontroller = require('./controllers/logincontroller');
 const indexcontroller = require('./controllers/indexcontroller');
@@ -69,18 +103,18 @@ const admincontroller = require('./controllers/admincontroller');
 
 
 
-logincontroller(app, db, urlencodedParser);
+logincontroller(app, db);
 indexcontroller(app);
 aboutcontroller(app);
 blogcontroller(app);
-contactcontroller(app, jsonParser, urlencodedParser);
-menucontroller(app, db, urlencodedParser);
+contactcontroller(app);
+menucontroller(app, db);
 servicescontroller(app);
 checkoutcontroller(app);
 thankscontroller(app);
-registercontroller(app, db, urlencodedParser);
-cartcontroller(app,db , urlencodedParser);
-admincontroller(app, db, urlencodedParser)
+registercontroller(app, db);
+cartcontroller(app,db );
+admincontroller(app, db)
 
 const port = process.env.PORT || 3000;
 
@@ -92,11 +126,3 @@ app.listen(port, (err) => {
         console.log('App listening on port ' + port);
     }
 });
-
-
-//session checker function
-setInterval(function () {
-    store.length().then(function (length) {
-        console.log('There are ' + JSON.stringify(length) + ' sessions');
-    })
-}, 10000);

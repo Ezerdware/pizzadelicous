@@ -1,11 +1,11 @@
 let nodemailer = require('nodemailer');
 
-function contactcontroller(app, jsonParser, urlencodedParser) {
+function contactcontroller(app) {
 
     app.get('/contact', async (req, res) => {
         res.render('contact');
     });
-    app.post('/contact', urlencodedParser, async (req, res) => {
+    app.post('/contact', async (req, res) => {
         console.log(req.body);
         mailer(req.body);
         res.json('Message sent');
