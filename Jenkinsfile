@@ -30,7 +30,7 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: '6c92d9fa-3d44-49e6-9d40-55439226aa55', keyFileVariable: 'SSH')]) {
                     echo 'Deploying....'
-                    sh 'git push publish main:refs/heads/main'
+                    sh 'git push publish main'
                 }
             }
         }
