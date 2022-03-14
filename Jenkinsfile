@@ -30,7 +30,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'dockerpassword', usernameVariable: 'dockerusername')]) {
                     echo 'Building docker image..'
                     echo '${env}'
-                    sh 'cat ${dockerpassword} | docker login u=${dockerusername} --password-stdin'
+                    sh 'cat dockerpassword.txt | docker login --usermane=${dockerusername} --password-stdin'
                     sh 'docker build - < Dockerfile'
                     sh 'docker image ls'
                     sh 'docker push bambby/pizzadelicious:jenkins'
