@@ -27,10 +27,13 @@ pipeline {
               }
             }
             steps {
-                echo 'Building docker image..'
-                sh 'docker build -t bambby/pizzadelicious'
-                sh 'docker image ls'
-                sh 'docker push bambby/pizzadelicious'
+                withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'dockerpassword', usernameVariable: 'dockerusername')]) {
+                    echo 'Building docker image..'
+                    sh 'docker login u=${env.dockerusername} -p=${env.dockerpassword}'
+                    sh 'docker build - < Dockerfile'
+                    sh 'docker image ls'
+                    sh 'docker push bambby/pizzadelicious:jenkins'
+                }
             }
         }
         stage('Deploy') {
