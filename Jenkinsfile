@@ -31,7 +31,7 @@ pipeline {
                 withCredentials([sshUserPrivateKey(credentialsId: '6c92d9fa-3d44-49e6-9d40-55439226aa55', keyFileVariable: 'SSH')]) {
                     echo 'Deploying....'
                     // sh 'heroku git:remote -a pizzadelicioustest'
-                    sh 'git push heroku'
+                    sh 'git push heroku HEAD:master'
                 }
             }
         }
