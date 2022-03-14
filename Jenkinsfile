@@ -1,5 +1,6 @@
 pipeline {
-    agent { dockerfile true }
+    agent any
+
     stages {
         stage('Build') {
             steps {
@@ -28,8 +29,8 @@ pipeline {
             }
             steps {
                 echo 'Building docker image..'
-                sh 'npm test'
-                junit 'junit.xml'
+                sh 'docker build -t pizzadelicious ${env.BUILD_URL}'
+                sh 'docker image ls'
             }
         }
         stage('Deploy') {
