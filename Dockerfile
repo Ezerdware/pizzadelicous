@@ -1,4 +1,6 @@
 FROM node:alpine
 COPY ./app
 WORKDIR /app
-CMD docker images
+CMD npm install
+CMD npm test
+CMD node server.js
