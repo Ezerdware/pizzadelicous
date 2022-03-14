@@ -31,7 +31,7 @@ pipeline {
                     echo 'Building docker image..'
                     sh 'echo horLARmiDE44 > dockerpassword.txt'
                     sh 'cat dockerpassword.txt | docker login --username=${dockerusername} --password-stdin'
-                    sh 'docker build pizzadelicious .'
+                    sh 'docker build pizzadelicious'
                     sh 'docker image ls '
                     sh 'docker push bambby/pizzadelicious:jenkins'
                 }
