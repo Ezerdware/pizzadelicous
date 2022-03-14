@@ -29,7 +29,7 @@ async function sessionSettings(app){
         app.use(session({
     
             genid: (req) => { return nanoid.nanoid(100) },
-            name: 'Pizzadelicious Frontend Production',
+            name: 'Pizza Frontend Production',
             store: new memorystore({
                 checkPeriod: 1000 * 60 * 60
             }),
@@ -44,7 +44,7 @@ async function sessionSettings(app){
         app.use(session({
     
             genid: (req) => { return nanoid.nanoid(100) },
-            name: 'Pizzadelicious Frontend Development',
+            name: 'Pizza Frontend Development',
             store: new memorystore({
                 checkPeriod: 1000 * 60 * 60
             }),
@@ -59,7 +59,7 @@ async function sessionSettings(app){
         app.use(session({
     
             genid: (req) => { return nanoid.nanoid(100) },
-            name: 'Pizzadelicious Frontend Staging',
+            name: 'Pizza Frontend Staging',
             store: new memorystore({
                 checkPeriod: 1000 * 60 * 60
             }),
