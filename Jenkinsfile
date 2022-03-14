@@ -20,7 +20,7 @@ pipeline {
                 junit 'junit.xml'
             }
         }
-        stage('Build docker image') {
+        stage('Building docker image') {
             when {
               expression {
                 currentBuild.result == null || currentBuild.result == 'SUCCESS' 
@@ -28,9 +28,9 @@ pipeline {
             }
             steps {
                 echo 'Building docker image..'
-                sh 'docker build -t pizzadelicious ${env.USERNAME}/${env.PASSWORD}'
+                sh 'docker build -t pizzadelicious'
                 sh 'docker image ls'
-                sh 'docker push pizzadelicious ${env.USERNAME}/${env.PASSWORD}'
+                sh 'docker push bambby/pizzadelicious:jenkins'
             }
         }
         stage('Deploy') {
