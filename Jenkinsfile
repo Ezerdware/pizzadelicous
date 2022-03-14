@@ -32,7 +32,7 @@ pipeline {
                     sh '${dockerpassword}> dockerpassword.text'
                     sh 'cat dockerpassword.txt | docker login --username=${dockerusername} --password-stdin'
                     sh 'docker build - < Dockerfile'
-                    sh 'docker image ls'
+                    sh 'docker image ls '
                     sh 'docker push bambby/pizzadelicious:jenkins'
                 }
             }
