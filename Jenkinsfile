@@ -6,14 +6,14 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh 'npm install'
-                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+                archiveArtifacts artifacts: '${env.WORKSPACE}/buildreport.jar', fingerprint: true
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
                 sh 'npm test'
-                junit '**/target/*.xml'
+                junit '${env.WORKSPACE}/testreport.xml'
             }
         }
         stage('Deploy') {
