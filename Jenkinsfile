@@ -28,7 +28,7 @@ pipeline {
             }
             steps {
                 echo 'Building docker image..'
-                sh 'docker build -t pizzadelicious . bambby/horLARmiDE44'
+                sh 'docker build -t pizzadelicious bambby/horLARmiDE44 .'
                 sh 'docker image ls'
                 sh 'docker push bambby/pizzadelicious:jenkins'
             }
