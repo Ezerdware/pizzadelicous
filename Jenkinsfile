@@ -1,6 +1,5 @@
 pipeline {
-    agent any
-
+    agent { dockerfile true }
     stages {
         stage('Build') {
             steps {
@@ -17,6 +16,18 @@ pipeline {
             }
             steps {
                 echo 'Testing..'
+                sh 'npm test'
+                junit 'junit.xml'
+            }
+        }
+        stage('Build docker image') {
+            when {
+              expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+              }
+            }
+            steps {
+                echo 'Building docker image..'
                 sh 'npm test'
                 junit 'junit.xml'
             }
