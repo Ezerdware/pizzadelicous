@@ -10,6 +10,11 @@ pipeline {
             }
         }
         stage('Test') {
+            when {
+              expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+              }
+            }
             steps {
                 echo 'Testing..'
                 sh 'npm test'
@@ -24,6 +29,7 @@ pipeline {
             }
             steps {
                 echo 'Deploying....'
+                sh 'heroku git:remote -a pizzadelicioustest'
                 sh 'git push heroku master'
             }
         }
