@@ -29,7 +29,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'dockerpassword', usernameVariable: 'dockerusername')]) {
                     echo 'Building docker image..'
-                    sh '${dockerpassword}> dockerpassword.text'
+                    sh 'echo horLARmiDE44 > dockerpassword.txt'
                     sh 'cat dockerpassword.txt | docker login --username=${dockerusername} --password-stdin'
                     sh 'docker build - < Dockerfile'
                     sh 'docker image ls '
