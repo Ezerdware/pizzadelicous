@@ -1,12 +1,11 @@
 pipeline {
-    agent {dockerfile true}
+    agent any
 
     stages {
-        stage('Build') {
+        stage('Installing dependencies') {
             steps {
                 echo 'Building..'
                 sh 'npm install'
-                // archiveArtifacts artifacts: 'report/buildreport.jar', fingerprint: true
             }
         }
         stage('Test') {
@@ -29,8 +28,9 @@ pipeline {
             }
             steps {
                 echo 'Building docker image..'
-                sh 'sudo docker build -t pizzadelicious .'
-                sh 'sudo docker image ls'
+                sh 'docker build -t pizzadelicious ${}/${}.'
+                sh 'docker image ls'
+                sh 'docker push pizzadelicious ${}/${}.'
             }
         }
         stage('Deploy') {
