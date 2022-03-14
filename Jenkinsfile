@@ -29,8 +29,8 @@ pipeline {
             }
             steps {
                 echo 'Building docker image..'
-                sh 'docker build -t pizzadelicious .'
-                sh 'docker image ls'
+                sh 'sudo docker build -t pizzadelicious .'
+                sh 'sudo docker image ls'
             }
         }
         stage('Deploy') {
