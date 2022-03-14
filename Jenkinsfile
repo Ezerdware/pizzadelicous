@@ -18,7 +18,7 @@ pipeline {
             steps {
                 echo 'Testing..'
                 sh 'npm test'
-                // junit 'report/testreport.xml'
+                junit 'junit.xml'
             }
         }
         stage('Deploy') {
