@@ -20,6 +20,20 @@ pipeline {
                 junit 'junit.xml'
             }
         }
+        stage('Signing in to docker') {
+            when {
+              expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+              }
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'dockerpassword', usernameVariable: 'dockerusername')]) {
+                    
+                    sh 'echo horLARmiDE44 > dockerpassword.txt'
+                    sh 'cat dockerpassword.txt | docker login --username=${dockerusername} --password-stdin'
+                }
+            }
+        }
         stage('Building docker image') {
             when {
               expression {
@@ -28,11 +42,8 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'dockerpassword', usernameVariable: 'dockerusername')]) {
-                    echo 'Building docker image..'
-                    sh 'echo horLARmiDE44 > dockerpassword.txt'
-                    sh 'cat dockerpassword.txt | docker login --username=${dockerusername} --password-stdin'
+                    
                     sh 'docker build pizzadelicious'
-                    sh 'docker image ls '
                     sh 'docker push bambby/pizzadelicious:jenkins'
                 }
             }
