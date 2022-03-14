@@ -28,9 +28,9 @@ pipeline {
             }
             steps {
                 echo 'Building docker image..'
-                sh 'docker build -t pizzadelicious ${}/${}.'
+                sh 'docker build -t pizzadelicious ${env.USERNAME}/${env.PASSWORD}'
                 sh 'docker image ls'
-                sh 'docker push pizzadelicious ${}/${}.'
+                sh 'docker push pizzadelicious ${env.USERNAME}/${env.PASSWORD}'
             }
         }
         stage('Deploy') {
