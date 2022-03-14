@@ -29,7 +29,7 @@ pipeline {
             }
             steps {
                 echo 'Building docker image..'
-                sh 'docker build -t pizzadelicious ${env.BUILD_URL}'
+                sh 'docker build -t pizzadelicious ${env.WORKSPACE}'
                 sh 'docker image ls'
             }
         }
