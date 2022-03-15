@@ -44,11 +44,23 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'dockerpassword', usernameVariable: 'dockerusername')]) {
                     sh 'docker build . -t pizzadelicious'
                     sh 'docker images'
-                    sh 'docker push bambby/pizzadelicious:pizzadelicious'
                 }
             }
         }
-        stage('Deploy') {
+        stage('Push to docker repo') {
+            when {
+              expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+              }
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'dockerpassword', usernameVariable: 'dockerusername')]) {
+                    
+                    sh 'docker push pizzadelicious:latest'
+                }
+            }
+        }
+        stage('Deploy to heroku') {
             when {
               expression {
                 currentBuild.result == null || currentBuild.result == 'SUCCESS' 
