@@ -56,7 +56,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'dockerpassword', usernameVariable: 'dockerusername')]) {
                     
-                    sh 'docker push pizzadelicious:latest'
+                    sh 'docker push bambby/pizzadelicious:latest'
                 }
             }
         }
