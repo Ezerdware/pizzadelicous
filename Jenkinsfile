@@ -60,18 +60,18 @@ pipeline {
                 }
             }
         }
-        // stage('Pushing to docker repo') {
-        //     when {
-        //       expression {
-        //         currentBuild.result == null || currentBuild.result == 'SUCCESS' 
-        //       }
-        //     }
-        //     steps {
-        //         withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'dockerpassword', usernameVariable: 'dockerusername')]) {
-        //             sh 'docker push bambby/pizzadelicious:latest'
-        //         }
-        //     }
-        // }
+        stage('Pushing to docker repo') {
+            when {
+              expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+              }
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'dockerpassword', usernameVariable: 'dockerusername')]) {
+                    sh 'docker push bambby/pizzadelicious:latest'
+                }
+            }
+        }
         stage('Login in into heroku') {
             when {
               expression {
@@ -80,7 +80,8 @@ pipeline {
             }
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: '6c92d9fa-3d44-49e6-9d40-55439226aa55', keyFileVariable: 'SSH')]) {
-                    sh 'yes "john.alabi@smartsafeuk.com" "horLARmiDE44(+++)" | heroku login --interactive'
+                    // sh 'yes "john.alabi@smartsafeuk.com" "horLARmiDE44(+++)" | heroku login --interactive'
+                    sh 'heroku login --interactive'
                 }
             }
         }
