@@ -47,7 +47,7 @@ pipeline {
                 }
             }
         }
-        stage('Push to docker repo') {
+        stage('Pushing to docker repo') {
             when {
               expression {
                 currentBuild.result == null || currentBuild.result == 'SUCCESS' 
