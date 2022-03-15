@@ -43,7 +43,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'dockerpassword', usernameVariable: 'dockerusername')]) {
                     sh 'docker images -f dangling=true'
-                    sh 'docker image prune'
+                    sh 'echo y > docker image prune'
                 }
             }
         }
