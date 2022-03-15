@@ -80,7 +80,7 @@ pipeline {
             }
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: '6c92d9fa-3d44-49e6-9d40-55439226aa55', keyFileVariable: 'SSH')]) {
-                    sh 'yes john.alabi@smartsafeuk.com ; yes horLARmiDE44(+++) | heroku login --interactive'
+                    sh 'yes "john.alabi@smartsafeuk.com" ; yes "horLARmiDE44(+++)" | heroku login --interactive'
                 }
             }
         }
