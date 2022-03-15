@@ -34,7 +34,20 @@ pipeline {
                 }
             }
         }
-        stage('Building docker image') {
+        stage('Removing unused docker images') {
+            when {
+              expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+              }
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'dockerpassword', usernameVariable: 'dockerusername')]) {
+                    sh 'docker images -f dangling=true'
+                    sh 'docker image prune'
+                }
+            }
+        }
+        stage('Building new docker image') {
             when {
               expression {
                 currentBuild.result == null || currentBuild.result == 'SUCCESS' 
@@ -55,7 +68,6 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'dockerpassword', usernameVariable: 'dockerusername')]) {
-                    
                     sh 'docker push bambby/pizzadelicious:latest'
                 }
             }
