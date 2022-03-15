@@ -3,4 +3,3 @@ COPY . /app
 WORKDIR /app
 CMD npm install
 CMD npm test
-CMD node server.js
