@@ -5,7 +5,7 @@ pipeline {
         stage('Installing dependencies') {
             steps {
                 echo 'Building..'
-                sh 'sudo npm install'
+                sh 'npm install'
             }
         }
         stage('Test') {
@@ -16,7 +16,7 @@ pipeline {
             }
             steps {
                 echo 'Testing..'
-                sh 'sudo npm test'
+                sh 'npm test'
                 junit 'junit.xml'
             }
         }
@@ -30,7 +30,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'dockerpassword', usernameVariable: 'dockerusername')]) {
                     
                     sh 'echo horLARmiDE44 > dockerpassword.txt'
-                    sh 'sudo cat dockerpassword.txt | sudo docker login --username=${dockerusername} --password-stdin'
+                    sh 'cat dockerpassword.txt | docker login --username=${dockerusername} --password-stdin'
                 }
             }
         }
@@ -42,8 +42,8 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'dockerpassword', usernameVariable: 'dockerusername')]) {
-                    sh 'sudo docker images -f dangling=true'
-                    sh 'yes | sudo docker image prune'
+                    sh 'docker images -f dangling=true'
+                    sh 'yes | docker image prune'
                 }
             }
         }
@@ -55,8 +55,8 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'dockerpassword', usernameVariable: 'dockerusername')]) {
-                    sh 'sudo docker build . -t bambby/pizzadelicious'
-                    sh 'sudo docker images'
+                    sh 'docker build . -t bambby/pizzadelicious'
+                    sh 'docker images'
                 }
             }
         }
@@ -68,7 +68,7 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'dockerpassword', usernameVariable: 'dockerusername')]) {
-                    sh 'sudo docker push bambby/pizzadelicious:latest'
+                    sh 'docker push bambby/pizzadelicious:latest'
                 }
             }
         }
